@@ -4,6 +4,7 @@ from aiogram.types import ParseMode, InlineKeyboardButton, InlineKeyboardMarkup
 from config import bot
 from keyboards.client_kb import start_markup
 from database.bot_db import sql_command_random
+from parser import movies
 
 
 # @dp.message_handler(commands=['start'])
@@ -43,7 +44,22 @@ async def show_random_user(message: types.Message):
     await sql_command_random(message)
 
 
+async def parser_movies(message: types.Message):
+    data = movies.parser()
+    for movie in data:
+        desc = movie['desc'].split(', ')
+        await bot.send_message(
+            message.from_user.id,
+            f"{movie['title']}\n"
+            f"Год: {desc[0]}\n"
+            f"Город: {desc[1]}\n"
+            f"Жанр: #{desc[2]}\n\n"
+            f"{movie['link']}"
+        )
+
+
 def register_handlers_client(dp: Dispatcher):
     dp.register_message_handler(command_start, commands=['start'])
     dp.register_message_handler(quiz_1, commands=['quiz'])
     dp.register_message_handler(show_random_user, commands=['random'])
+    dp.register_message_handler(parser_movies, commands=['film'])

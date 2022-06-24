@@ -30,10 +30,13 @@
 Если вы арендуете меньше 7 дней но больше 3 дней , 
 он все равно дает скидку 20$
 """
+#
+#
+# def arenda(days):
+#     return (days * 40) if days <= 3 else (days * 40) - 20 if 3 < days < 7 else (days * 40) - 50
+#
+#
+# print(arenda(2))
 
-
-def arenda(days):
-    return (days * 40) if days <= 3 else (days * 40) - 20 if 3 < days < 7 else (days * 40) - 50
-
-
-print(arenda(2))
+a = '2022, Россия, Мелодрамы'
+print(a.split(', '))
