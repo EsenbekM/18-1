@@ -3,7 +3,8 @@ import asyncio
 from aiogram.utils import executor
 
 from config import dp
-from handlers import extra, client, admin, callback, fsm_anketa, notification
+from handlers import extra, client, admin, callback, fsm_anketa, \
+    notification, inline
 import logging
 from database.bot_db import sql_create
 
@@ -18,7 +19,7 @@ callback.register_handlers_callback(dp)
 admin.register_handlers_admin(dp)
 fsm_anketa.register_handler_fsmanketa(dp)
 notification.register_handler_notification(dp)
-
+inline.register_inline_handler(dp)
 extra.register_handlers_extra(dp)
 
 if __name__ == "__main__":
