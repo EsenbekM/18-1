@@ -8,3 +8,4 @@ TOKEN = config("TOKEN")
 bot = Bot(TOKEN)
 dp = Dispatcher(bot=bot, storage=storage)
 ADMIN = [5367214519, ]
+URL = "https://python18-1.herokuapp.com/"
