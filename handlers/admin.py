@@ -3,6 +3,7 @@ from config import bot, ADMIN
 from database.bot_db import sql_commands_get_all_id
 from database import psql_db
 
+
 async def ban(message: types.Message):
     if message.chat.type != 'private':
         if message.from_user.id not in ADMIN:
@@ -26,6 +27,7 @@ async def reklama(message: types.Message):
     else:
         await message.answer("Ты не мой БОСС!!!")
 
+
 async def get_all_users(message: types.Message):
     if message.from_user.id in ADMIN:
         all_users = psql_db.cursor.execute("SELECT * FROM users")
@@ -38,7 +40,19 @@ async def get_all_users(message: types.Message):
     else:
         await message.answer("Ты не мой БОСС!!!")
 
+
+async def reklama_2(message: types.Message):
+    if message.from_user.id in ADMIN:
+        all_users = psql_db.cursor.execute("SELECT id FROM users")
+        result = psql_db.cursor.fetchall()
+        for id in result:
+            await bot.send_message(id[0], message.text[4:])
+    else:
+        await message.answer("Ты не мой БОСС!!!")
+
+
 def register_handlers_admin(dp: Dispatcher):
     dp.register_message_handler(ban, commands=['ban'], commands_prefix="!/")
     dp.register_message_handler(reklama, commands=['R'])
+    dp.register_message_handler(reklama_2, commands=['R2'])
     dp.register_message_handler(get_all_users, commands=['get'])
